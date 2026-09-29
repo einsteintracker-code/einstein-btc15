@@ -1,0 +1,22 @@
+{
+  "name": "einstein-btc15",
+  "version": "1.0.0",
+  "description": "Einstein BTC15 project with ChatGPT integration",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": [
+    "chatgpt",
+    "openai",
+    "express",
+    "api"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "openai": "^4.38.2"
+  }
+}
