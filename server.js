@@ -1,6 +1,11 @@
 require('dotenv').config();
 const express = require('express');
 const OpenAI = require('openai');
+  const {
+  getLiveMatches,
+  getUpcomingMatches,
+  getMatchScore,
+} = require('./tennis');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -53,7 +58,37 @@ app.post('/api/chat', async (req, res) => {
     });
   }
 });
+// Einstein Tennis API routes
 
+app.get('/api/tennis/live', async (req, res) => {
+  try {
+    const data = await getLiveMatches();
+    res.json(data);
+  } catch (error) {
+    console.error('Live tennis request failed:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.get('/api/tennis/upcoming', async (req, res) => {
+  try {
+    const data = await getUpcomingMatches();
+    res.json(data);
+  } catch (error) {
+    console.error('Upcoming tennis request failed:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.get('/api/tennis/match/:matchId', async (req, res) => {
+  try {
+    const data = await getMatchScore(req.params.matchId);
+    res.json(data);
+  } catch (error) {
+    console.error('Tennis match request failed:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
