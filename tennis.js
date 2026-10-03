@@ -18,7 +18,7 @@ async function tennisRequest(endpoint) {
     `${BASE_URL}${endpoint}`,
     {
       headers: {
-        "X-API-Key": TENNIS_API_KEY,
+        Authorization: `Bearer ${TENNIS_API_KEY}`,
         Accept: "application/json",
       },
     }
